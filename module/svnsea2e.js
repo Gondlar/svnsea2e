@@ -325,7 +325,7 @@ Hooks.once('setup', function() {
  * Set the default image for an item type instead of the mystery man
  **/
 Hooks.on('preCreateItem', function(entity, options, userId) {
-  entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
+  entity.data._source.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
 })
 
 /* -------------------------------------------- */
@@ -334,9 +334,9 @@ Hooks.on('preCreateItem', function(entity, options, userId) {
  * Set the default image for an actor type instead of the mystery man
  **/
 Hooks.on('preCreateActor', function(entity, options, userId) {
-  entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
+  entity.data._source.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
   if (entity.name == "") {
-    entity.name = "New " + (entity.type)[0].toUpperCase() + (entity.type).slice(1);
+    entity.data._source.name = "New " + (entity.type)[0].toUpperCase() + (entity.type).slice(1);
   }
 })
 
