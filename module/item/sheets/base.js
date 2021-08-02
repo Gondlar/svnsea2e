@@ -22,23 +22,30 @@ export class ItemSheetSS2e extends ItemSheet {
 
   /** @override */
   getData () {
-    const data = super.getData()
-    const isOwner = this.entity.owner
-    mergeObject(data, {
+    const baseData = super.getData()
+    const isOwner = this.document.isOwner
+    let sheetData = {
       owner: isOwner,
-      itemType: SVNSEA2E.itemTypes[data.item.type],
+      item: baseData.item,
+      itemType: SVNSEA2E.itemTypes[baseData.item.type],
+      img: baseData.data.img,
+      description: baseData.data.data.description,
+      infosource: baseData.data.data.infosource,
+      name: baseData.data.name,
       options: this.options,
       editable: this.isEditable,
       cssClass: isOwner ? 'editable' : 'locked',
       config: CONFIG.SVNSEA2E,
       dtypes: ['String', 'Number', 'Boolean']
-    })
-
-    if (data.item.type === 'background') {
-      this._prepareBackground(data.item.data)
     }
-    return data
+
+    this._getAdditionalData(sheetData, baseData.item.data.data)
+
+    return sheetData
   }
+
+  /** to be overridden by subclasses */
+  _getAdditionalData (sheetData, baseData) {}
 
   /* -------------------------------------------- */
 
@@ -62,20 +69,6 @@ export class ItemSheetSS2e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Prepare the Skills that the Actor has selected for use with the SkillSelector application
-   * @param {Object} data       The data transfer
-   * @private
-   */
-  _prepareBackground (data) {
-    data.selectedskills = {}
-    for (let i = 0; i < data.skills.length; i++) {
-      data.selectedskills[data.skills[i]] = CONFIG.SVNSEA2E.skills[data.skills[i]]
-    }
-
-    data.selectedadvantages = data.advantages
-  }
 
   _advCompare (object, value) {
     for (const property in object) {

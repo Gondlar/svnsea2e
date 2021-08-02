@@ -25,15 +25,14 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    *
    * @return {undefined}
    */
-  _prepareShipItems(data) {
-    const actorData = data.actor
+  _prepareShipItems(sheetData, baseData) {
     // Initialize containers.
     const adventures = []
     const backgrounds = []
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
-    for (const i of data.items) {
+    for (const i of baseData.items) {
       // Append to item types to their arrays
       if (i.type === 'shipadventure') {
         adventures.push(i)
@@ -43,8 +42,15 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     }
 
     // Assign and return
-    actorData.adventures = adventures
-    actorData.backgrounds = backgrounds
+    sheetData.adventures = adventures
+    sheetData.backgrounds = backgrounds
+    sheetData.cargo = baseData.data.data.cargo
+    sheetData.class = baseData.data.data.class
+    sheetData.crew = baseData.data.data.crew
+    sheetData.crewstatus = baseData.data.data.crewstatus
+    sheetData.origin = baseData.data.data.origin
+    sheetData.wealth = baseData.data.data.wealth
+    sheetData.wounds = baseData.data.data.wounds
   }
 
   /**
@@ -53,7 +59,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * @param {Obejct} data The data object to update with any flag data.
    * @param {Object} flags The set of flags for the Actor
    */
-  _processFlags(data, flags) {
+  _processFlags(sheetData, flags) {
     let svnsea2e = flags.svnsea2e
 
     if (!svnsea2e) svnsea2e = {}
@@ -257,7 +263,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     crew.shipsmaster.actors = shipsmaster
     crew.surgeon.actors = surgeon
 
-    data.crew = Object.values(crew)
+    sheetData.crew = Object.values(crew)
   }
 
   /**

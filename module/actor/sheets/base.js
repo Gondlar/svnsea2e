@@ -20,49 +20,54 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /** @override */
   getData () {
-    const data = super.getData()
-    const isOwner = this.entity.owner
-    mergeObject(data, {
+    const baseData = super.getData()
+    const isOwner = this.document.isOwner;
+    let sheetData = {
       owner: isOwner,
-      limited: this.entity.limited,
+      actor: baseData.actor,
+      limited: this.document.limited,
       options: this.options,
       editable: this.isEditable,
-      isCorrupt: this.entity.data.data.corruptionpts > 0,
+      isCorrupt: this.document.data.data.corruptionpts > 0,
       cssClass: isOwner ? 'editable' : 'locked',
-      isPlayerCharacter: this.entity.data.type === 'playercharacter',
-      isHero: this.entity.data.type === 'hero',
-      isVillain: this.entity.data.type === 'villain',
-      isMonster: this.entity.data.type === 'monster',
-      isNotBrute: this.entity.data.type !== 'brute',
-      hasSkills: typeof this.entity.data.data.skills !== 'undefined',
-      hasLanguages: typeof this.entity.data.data.languages !== 'undefined',
+      isPlayerCharacter: this.document.data.type === 'playercharacter',
+      isHero: this.document.data.type === 'hero',
+      isVillain: this.document.data.type === 'villain',
+      isMonster: this.document.data.type === 'monster',
+      isNotBrute: this.document.data.type !== 'brute',
+      hasSkills: typeof this.document.data.data.skills !== 'undefined',
+      hasLanguages: typeof this.document.data.data.languages !== 'undefined',
       config: CONFIG.SVNSEA2E,
       dtypes: ['String', 'Number', 'Boolean']
-    })
+    }
 
     if (this.actor.data.type !== 'ship' && this.actor.data.type !== 'dangerpts') {
-      this._prepareTraits(data)
+      this._prepareTraits(sheetData, baseData)
     }
 
     // Prepare items.
     if (this.actor.data.type === 'playercharacter') {
-      this._prepareCharacterItems(data)
+      this._prepareCharacterItems(sheetData, baseData)
       // Update languages
-      this._prepareLanguages(data.actor.data)
+      this._prepareLanguages(sheetData, baseData.actor.data.data)
+    } else if (this.actor.data.type === 'brute') {
+      this._prepareBruteItems(sheetData, baseData.actor.data.data)
+    } else if (this.actor.data.type === 'dangerpts') {
+      this._prepareDangerptsItems(sheetData, baseData.actor.data.data)
     } else if (this.actor.data.type === 'hero') {
-      this._prepareHeroItems(data)
-      this._prepareLanguages(data.actor.data)
+      this._prepareHeroItems(sheetData, baseData)
+      this._prepareLanguages(sheetData, baseData.actor.data.data)
     } else if (this.actor.data.type === 'villain') {
-      this._prepareVillainItems(data)
-      this._prepareLanguages(data.actor.data)
+      this._prepareVillainItems(sheetData, baseData)
+      this._prepareLanguages(sheetData, baseData.actor.data.data)
     } else if (this.actor.data.type === 'monster') {
-      this._prepareMonsterItems(data)
+      this._prepareMonsterItems(sheetData, baseData)
     } else if (this.actor.data.type === 'ship') {
-      this._prepareShipItems(data)
-      this._processFlags(data, data.actor.flags)
+      this._prepareShipItems(sheetData, baseData)
+      this._processFlags(sheetData, baseData.actor.data.flags)
     }
 
-    return data
+    return sheetData
   }
 
   /* -------------------------------------------- */
@@ -80,10 +85,12 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  _prepareTraits (data) {
+  _prepareTraits (sheetData, baseData) {
+    sheetData.traits = {}
     // Update trait labels
-    for (const [t, trait] of Object.entries(data.actor.data.traits)) {
-      trait.label = CONFIG.SVNSEA2E.traits[t]
+    for (const [t, trait] of Object.entries(baseData.actor.data.data.traits)) {
+      sheetData.traits[t] = trait
+      sheetData.traits[t].label = CONFIG.SVNSEA2E.traits[t]
     }
   }
 
@@ -144,10 +151,11 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @param {Object} data       The data transfer
    * @private
    */
-  _prepareLanguages (data) {
-    data.selectedlangs = {}
-    for (let i = 0; i < data.languages.length; i++) {
-      data.selectedlangs[data.languages[i]] = CONFIG.SVNSEA2E.languages[data.languages[i]]
+  _prepareLanguages (sheetData, baseData) {
+    sheetData.selectedlangs = {}
+    for (let i = 0; i < baseData.languages.length; i++) {
+      const lang = baseData.languages[i]
+      sheetData.selectedlangs[lang] = CONFIG.SVNSEA2E.languages[lang]
     }
   }
 

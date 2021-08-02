@@ -15,4 +15,10 @@ export class ActorSheetSS2eBrute extends ActorSheetSS2e {
       }]
     })
   }
+
+  _prepareBruteItems (sheetData, baseData) {
+    sheetData.wounds = baseData.wounds
+    sheetData.ability = baseData.ability
+  }
+
 }

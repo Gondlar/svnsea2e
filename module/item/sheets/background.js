@@ -22,4 +22,16 @@ export class ItemSheetSS2eBackground extends ItemSheetSS2e {
       }]
     })
   }
+  
+  _getAdditionalData (sheetData, baseData) {
+    sheetData.nation = baseData.nation
+    sheetData.quirk = baseData.quirk
+
+    sheetData.selectedskills = {}
+    for (let i = 0; i < baseData.skills.length; i++) {
+      sheetData.selectedskills[baseData.skills[i]] = CONFIG.SVNSEA2E.skills[baseData.skills[i]]
+    }
+
+    sheetData.selectedadvantages = baseData.advantages
+  }
 }

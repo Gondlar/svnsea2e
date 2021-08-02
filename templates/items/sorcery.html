@@ -7,7 +7,7 @@
         <div class="form-group flex-group">
           <label for="data.sorctype">{{localize "SVNSEA2E.Type"}}</label>
           <select class="sorcery-type" name="data.sorctype">
-            {{#select data.sorctype}}
+            {{#select sorctype}}
               <option value="none"></option>
               {{#each config.sorceryTypes as |label type|}}
                 <option value="{{type}}">{{label}}</option>
@@ -18,7 +18,7 @@
         <div class="form-group flex-group">
           <label for="data.sorcdur">{{localize "SVNSEA2E.Duration"}}</label>
           <select class="sorcery-type" name="data.sorcdur">
-            {{#select data.sorcdur}}
+            {{#select sorcdur}}
               <option value="none"></option>
               {{#each config.durations as |label duration|}}
                 <option value="{{duration}}">{{label}}</option>
@@ -31,7 +31,7 @@
         <div class="form-group flex-group">
           <label for="data.sorccat">{{localize "SVNSEA2E.Category"}}</label>
           <select class="sorcery-category" name="data.sorccat">
-            {{#select data.sorccat}}
+            {{#select sorccat}}
               <option value="none"></option>
               {{#each config.sorceryCats as |label cat|}}
                 <option value="{{cat}}">{{label}}</option>
@@ -41,7 +41,7 @@
           </div><div class="form-group flex-group">
             <label for="data.sorcsubcat">{{localize "SVNSEA2E.SubCategory"}}</label>
             <select class="sorcery-subcategory" name="data.sorcsubcat">
-              {{#select data.sorcsubcat}}
+              {{#select sorcsubcat}}
                 <option value="none"></option>
                 {{#each config.sorcerySubcats as |label cat|}}
                   <option value="{{cat}}">{{label}}</option>
@@ -64,9 +64,7 @@
   <section class="sheet-body">
 
     {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-    </div>
+    {{> "systems/svnsea2e/templates/items/parts/item-description.html"}}
 
   </section>
 </form>

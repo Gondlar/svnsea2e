@@ -21,4 +21,11 @@ export class ItemSheetSS2eSorcery extends ItemSheetSS2e {
       }]
     })
   }
+  
+  _getAdditionalData (sheetData, baseData) {
+    sheetData.sorctype = baseData.sorctype
+    sheetData.sorcdur = baseData.sorcdur
+    sheetData.sorccat = baseData.sorccat
+    sheetData.sorcsubcat = baseData.sorcsubcat
+  }
 }

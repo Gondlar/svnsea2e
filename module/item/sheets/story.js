@@ -20,4 +20,11 @@ export class ItemSheetSS2eStory extends ItemSheetSS2e {
       }]
     })
   }
+
+  _getAdditionalData (sheetData, baseData) {
+    sheetData.status = baseData.status
+    sheetData.reward = baseData.reward
+    sheetData.endings = baseData.endings
+    sheetData.steps = baseData.steps
+  }
 }

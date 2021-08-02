@@ -3,7 +3,7 @@
   <div class="form-group flex-group">
     <label for="data.nation">{{localize "SVNSEA2E.Nation"}}</label>
     <select class="nation" name="data.nation">
-      {{#select data.nation}}
+      {{#select nation}}
         <option value="none"></option>
         {{#each config.nations as |label nation|}}
           <option value="{{nation}}">{{label}}</option>
@@ -12,7 +12,7 @@
     </select>
     <span class="flex-group-right twodigit">
       <label for="data.age">{{localize "SVNSEA2E.Age"}}</label>
-      <input type="text" name="data.age" value="{{data.age}}" />
+      <input type="text" name="data.age" value="{{age}}" />
     </span>
   </div>
 </div>

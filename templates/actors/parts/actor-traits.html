@@ -2,7 +2,7 @@
 <div class="tab traits" data-group="primary" data-tab="traits">
   <h3 class="trait-title">{{localize "SVNSEA2E.Traits"}}</h3>
   <div class="traits grid grid-3col">
-    {{#each data.traits as |trait key|}}
+    {{#each traits as |trait key|}}
       <div class="trait flexrow flex-group flex-left">
         <span class="trait-name">
           {{trait.label}}
@@ -22,7 +22,7 @@
   {{#if hasSkills}}
     <h3 class="skill-title">{{localize "SVNSEA2E.Skills"}}</h3>
     <div class="skills grid grid-3col">
-      {{#each data.skills as |skill key|}}
+      {{#each skills as |skill key|}}
         <div class="skill flexrow flex-group flex-left">
           <span class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{key}}">
             {{skill.label}}
@@ -49,7 +49,7 @@
     <h3 class="language-title">{{localize "SVNSEA2E.Languages"}}</h3>
     <div class="language flexrow flex-group flex-left">
       <ul class="tag-list">
-        {{#each data.selectedlangs as |k v|}}
+        {{#each selectedlangs as |k v|}}
           <li class="tag {{v}}">{{k}}</li>
         {{/each}}
       </ul>

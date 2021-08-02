@@ -18,6 +18,10 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
     })
   }
 
+  _prepareDangerptsItems (sheetData, baseData) {
+    sheetData.points = baseData.points
+  }
+
   /**
    * Activate event listeners using the prepared sheet HTML
    *

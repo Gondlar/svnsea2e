@@ -21,4 +21,8 @@ export class ItemSheetSS2eDuelStyle extends ItemSheetSS2e {
       }]
     })
   }
+  
+  _getAdditionalData (sheetData, baseData) {
+    sheetData.bonus = baseData.bonus
+  }
 }

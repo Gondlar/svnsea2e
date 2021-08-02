@@ -24,12 +24,14 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
    *
    * @return {undefined}
    */
-  _prepareHeroItems (data) {
-    const actorData = data.actor
+  _prepareHeroItems (sheetData, baseData) {
+    const actorData = baseData.actor
 
     // Update skill labels
-    for (const [s, skl] of Object.entries(data.actor.data.skills)) {
-      skl.label = CONFIG.SVNSEA2E.skills[s]
+    sheetData.skills = {}
+    for (const [s, skl] of Object.entries(actorData.data.data.skills)) {
+      sheetData.skills[s] = skl
+      sheetData.skills[s].label = CONFIG.SVNSEA2E.skills[s]
     }
 
     // Initialize containers.
@@ -43,7 +45,7 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
-    for (const i of data.items) {
+    for (const i of baseData.items) {
       // Append to item types to their arrays
       if (i.type === 'advantage') {
         advantages.push(i)
@@ -63,12 +65,22 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
     }
 
     // Assign and return
-    actorData.advantages = advantages
-    actorData.backgrounds = backgrounds
-    actorData.sorcery = sorcery
-    actorData.secretsocieties = secretsocieties
-    actorData.stories = stories
-    actorData.duelstyles = duelstyles
-    actorData.artifacts = artifacts
+    sheetData.advantages = advantages
+    sheetData.age = baseData.actor.data.data.age
+    sheetData.arcana = baseData.actor.data.data.arcana
+    sheetData.artifacts = artifacts
+    sheetData.backgrounds = backgrounds
+    sheetData.concept = baseData.actor.data.data.concept
+    sheetData.duelstyles = duelstyles
+    sheetData.dwounds = baseData.actor.data.data.dwounds
+    sheetData.hubris = baseData.actor.data.data.hubris
+    sheetData.nation = baseData.actor.data.data.nation
+    sheetData.redemption = baseData.actor.data.data.redemption
+    sheetData.religion = baseData.actor.data.data.religion
+    sheetData.reputation = baseData.actor.data.data.reputation
+    sheetData.sorcery = sorcery
+    sheetData.secretsocieties = secretsocieties
+    sheetData.virtue = baseData.actor.data.data.virtue
+    sheetData.wounds = baseData.actor.data.data.wounds
   }
 }

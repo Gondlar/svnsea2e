@@ -6,7 +6,7 @@
       <div class="form-group">
         <label for="data.nation">{{localize "SVNSEA2E.Status"}}</label>
         <select class="status" name="data.status">
-          {{#select data.status}}
+          {{#select status}}
             <option value="none"></option>
             {{#each config.storyStatuses as |label status|}}
               <option value="{{status}}">{{label}}</option>
@@ -37,23 +37,21 @@
   <section class="sheet-body">
 
     {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-    </div>
+    {{> "systems/svnsea2e/templates/items/parts/item-description.html"}}
 
     {{!-- Reward Tab --}}
     <div class="tab endings" data-group="primary" data-tab="reward">
-      {{editor content=data.reward target="data.reward" button=true owner=owner editable=editable}}
+      {{editor content=reward target="data.reward" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Endings Tab --}}
     <div class="tab endings" data-group="primary" data-tab="endings">
-      {{editor content=data.endings target="data.endings" button=true owner=owner editable=editable}}
+      {{editor content=endings target="data.endings" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Steps Tab --}}
     <div class="tab steps" data-group="primary" data-tab="steps">
-      {{editor content=data.steps target="data.steps" button=true owner=owner editable=editable}}
+      {{editor content=steps target="data.steps" button=true owner=owner editable=editable}}
     </div>
   </section>
 </form>

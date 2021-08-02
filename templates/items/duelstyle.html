@@ -16,11 +16,9 @@
   </nav>
   {{!-- Sheet Body --}}
   <section class="sheet-body">
-    <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-    </div>
+    {{> "systems/svnsea2e/templates/items/parts/item-description.html"}}
     <div class="tab" data-group="primary" data-tab="bonus">
-      {{editor content=data.bonus target="data.bonus" button=true owner=owner editable=editable}}
+      {{editor content=bonus target="data.bonus" button=true owner=owner editable=editable}}
     </div>
   </section>
 </form>

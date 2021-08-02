@@ -20,4 +20,8 @@ export class ItemSheetSS2eScheme extends ItemSheetSS2e {
       }]
     })
   }
+  
+  _getAdditionalData (sheetData, baseData) {
+    sheetData.influence = baseData.influence
+  }
 }

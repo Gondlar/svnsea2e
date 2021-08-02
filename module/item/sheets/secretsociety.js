@@ -19,4 +19,11 @@ export class ItemSheetSS2eSecretSociety extends ItemSheetSS2e {
       }]
     })
   }
+  
+  _getAdditionalData (sheetData, baseData) {
+    sheetData.favor = baseData.favor
+    sheetData.concern = baseData.concern
+    sheetData.earnfavor = baseData.earnfavor
+    sheetData.callupon = baseData.callupon
+  }
 }

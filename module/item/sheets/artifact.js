@@ -21,4 +21,8 @@ export class ItemSheetSS2eArtifact extends ItemSheetSS2e {
       }]
     })
   }
+
+  _getAdditionalData (sheetData, baseData) {
+    sheetData.type = baseData.type
+  }
 }

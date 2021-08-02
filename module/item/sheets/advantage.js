@@ -21,4 +21,10 @@ export class ItemSheetSS2eAdvantage extends ItemSheetSS2e {
       }]
     })
   }
+
+  _getAdditionalData (sheetData, baseData) {
+    sheetData.cost = baseData.cost
+    sheetData.knack = baseData.knack
+    sheetData.innate = baseData.innate
+  }
 }
