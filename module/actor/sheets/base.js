@@ -413,7 +413,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (itemData.type === 'background') {
       if (itemData.data.nation === 'gisles' && (this.actor.data.data.nation === 'highland' || this.actor.data.data.nation === 'avalon' || this.actor.data.data.nation === 'insmore')) {
         await this._processBackgroundDrop(itemData)
-        return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
+        return await this.actor.createEmbeddedEntity('Item', itemData)
       }
       if (itemData.data.nation !== 'none' && itemData.data.nation !== this.actor.data.data.nation) {
         return ui.notifications.error(game.i18n.format('SVNSEA2E.WrongNation', {
@@ -425,7 +425,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       await this._processBackgroundDrop(itemData)
     }
     // Create the owned item
-    return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
+    return await this.actor.createEmbeddedEntity('Item', itemData)
   }
 
   /* -------------------------------------------- */
@@ -547,7 +547,7 @@ export default class ActorSheetSS2e extends ActorSheet {
           continue
         }
       }
-      await this.actor.createEmbeddedEntity('OwnedItem', duplicate(advantage))
+      await this.actor.createEmbeddedEntity('Item', duplicate(advantage))
     }
   }
 
